@@ -1,0 +1,16 @@
+<script>
+  jQuery(function ($) { // Using https://github.com/sdepold/jquery-rss
+    $("#rss-feed").rss("{{{feed}}}",
+      {
+        layoutTemplate: "<div class='continous vertical-center'> {entries} </div>",
+        entryTemplate: "<span class='feed-text'> &#8226; {title}</span>",
+        host: 'feedrapp.info',
+        limit: 2
+      })
+  })
+</script>
+
+
+<div id="wrapper">
+  <div id="rss-feed"></div>
+</div>

@@ -1,0 +1,47 @@
+#wrapper {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+#rss-feed {
+  height: 10%;
+  width: 99%;
+  position: absolute;
+  background-color: black;
+  bottom: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.vertical-center {
+  vertical-align: middle;
+  display: inline-block;
+  margin-top: 1%;
+}
+
+.continous {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+.marquee2 span {
+  animation-delay: 2.5s;
+}
+
+.feed-text {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 2em;
+color: white; 
+vertical-align: middle;
+}
