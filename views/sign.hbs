@@ -2,10 +2,10 @@
   jQuery(function ($) { // Using https://github.com/sdepold/jquery-rss
     $("#rss-feed").rss("{{{feed}}}",
       {
-        layoutTemplate: "<div class='continous vertical-center'> {entries} </div>",
-        entryTemplate: "<span class='feed-text'> &#8226; {title}</span>",
+        layoutTemplate: "<div id='news' class='continous vertical-center'> {entries} </div>",
+        entryTemplate: "<span class='feed-text'> {title} <span class='bullet'> &#8226;</span> </span>",
         host: 'feedrapp.info',
-        limit: 2
+        limit: 10
       })
   })
 </script>
@@ -14,3 +14,14 @@
 <div id="wrapper">
   <div id="rss-feed"></div>
 </div>
+
+
+<script>
+  setTimeout( //Waiting for the rss to load, doesnt work with document ready
+  function() 
+  {
+    $("#news").clone().appendTo("#rss-feed").attr("id", "second-news");
+  }, 1000);
+
+  
+</script>

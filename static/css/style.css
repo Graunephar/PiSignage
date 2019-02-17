@@ -2,29 +2,64 @@
   height: 100%;
   width: 100%;
   position: absolute;
+  margin: 0;
 }
+
 
 #rss-feed {
   height: 10%;
-  width: 99%;
+  width: 100%;
   position: absolute;
   background-color: black;
   bottom: 0;
   overflow: hidden;
   white-space: nowrap;
   text-align: center;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .vertical-center {
   vertical-align: middle;
   display: inline-block;
   margin-top: 1%;
+  
+}
+
+#news {
+  animation: marquee 60s linear infinite;
+  
+}
+
+#second-news {
+  animation: marquee2 60s linear infinite;
+  animation-delay: 30s;
+
 }
 
 .continous {
-  display: inline-block;
-  animation: marquee 20s linear infinite;
+  display: inline-block; /* time was 60s */ 
+
 }
+
+
+.bullet {
+  margin-left: .5%;
+  margin-right: .5%;
+}
+
+
+.feed-text {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 2em;
+color: white; 
+vertical-align: middle;
+}
+
 
 @keyframes marquee {
   0% {
@@ -35,13 +70,11 @@
   }
 }
 
-.marquee2 span {
-  animation-delay: 2.5s;
-}
-
-.feed-text {
-font-family: Arial, Helvetica, sans-serif;
-font-size: 2em;
-color: white; 
-vertical-align: middle;
+@keyframes marquee2 {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-200%);
+  }
 }
