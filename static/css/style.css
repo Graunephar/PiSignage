@@ -6,11 +6,17 @@
 }
 
 
-#rss-feed {
-  height: 10%;
+#bar {
   width: 100%;
-  position: absolute;
+  bottom: 0;
   background-color: black;
+  height: 10%;
+}
+
+#rss-feed {
+  
+  position: absolute;
+
   bottom: 0;
   overflow: hidden;
   white-space: nowrap;
