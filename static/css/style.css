@@ -3,17 +3,28 @@
   width: 100%;
   position: absolute;
   margin: 0;
+  overflow:hidden;
 }
 
-#rss-feed {
+#bar {
   background-color: black;
   position: absolute;
   bottom: 0;
-  margin: 0;
   width: 100%;
-  height: 10%;
+  height: 4em;
+  z-index: 10;
+}
+
+#rss-feed {
+  position: absolute;
+  bottom: 0;
   white-space: nowrap;
   overflow: hidden;
+  z-index: 100000;
+  text-align: left;
+  float: left;
+  margin-left: 0px;
+  padding-left: 0px;
 }
 
 body {
@@ -24,24 +35,30 @@ body {
 .vertical-center {
   vertical-align: middle;
   display: inline-block;
-  margin-top: 1%;
-  
+  margin-top: 1em;
+  margin-bottom: 1em;
+  position: relative;
 }
 
 #news {
-  animation: marquee 60s linear infinite;
+  animation: marquee 20s linear infinite;
   
 }
 
 #second-news {
   animation: marquee2 60s linear infinite;
   animation-delay: 30s;
-
 }
 
 .continous {
-  display: inline-block; /* time was 60s */ 
-
+  display: inline-block;
+  background-color: #90C !important;  
+  width: auto;
+  overflow: visible;
+  text-align: left;
+  float: left;
+  margin-left: 0px;
+  padding-left: 0px;
 }
 
 
@@ -60,11 +77,11 @@ vertical-align: middle;
 
 
 @keyframes marquee {
-  0% {
-    transform: translate(0, 0);
+  from {
+    transform: translateX(100%);
   }
-  100% {
-    transform: translate(-100%, 0);
+  to {
+    transform: translateX(-100%);
   }
 }
 

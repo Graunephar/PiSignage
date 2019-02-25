@@ -13,15 +13,19 @@
 
 <div id="wrapper">
   <div id="rss-feed"></div>
+  <div id="bar"></div>
 </div>
 
+<script>
+  $('#rss-feed').width($('#news').width());
+</script>
 
+<!-- 
 <script>
   setTimeout( //Waiting for the rss to load, doesnt work with document ready
   function() 
   {
-    $("#news").clone().appendTo("#rss-feed").attr("id", "second-news");
+    $("#news").clone().prependTo("#rss-feed").attr("id", "second-news");
   }, 1000);
-
-  
 </script>
+-->
