@@ -2,8 +2,8 @@
   jQuery(function ($) { // Using https://github.com/sdepold/jquery-rss
     $("#rss-feed").rss("{{{feed}}}",
       {
-        layoutTemplate: "<div id='news' class='continous vertical-center'> {entries} </div>",
-        entryTemplate: "<span class='feed-text'> {title} <span class='bullet'> &#8226;</span> </span>",
+        layoutTemplate: "<div class='default-ticker'> {entries} </div>",
+        entryTemplate: "<div class='feed-text'> {title} <span class='bullet'>&#8226;</span></div>",
         host: 'feedrapp.info',
         limit: 10
       })
@@ -15,27 +15,19 @@
   <div id="bar"></div>
 </div>
 
+<!--
 <div class="default-ticker">
   <div>Element 1</div>
   <div>Element 2</div>
   <div>Element 3</div>
   <div>Element 4</div>
   <div>Element 5</div>
-  
 </div>
+-->
 
-<script>
-  $(".default-ticker").ticker();
-</script>
-
-
-
-<!-- 
 <script>
   setTimeout( //Waiting for the rss to load, doesnt work with document ready
-  function() 
-  {
-    $("#news").clone().prependTo("#rss-feed").attr("id", "second-news");
-  }, 1000);
+    function () {
+      $(".default-ticker").ticker();
+    }, 1000);
 </script>
--->
