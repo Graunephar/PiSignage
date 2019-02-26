@@ -20,17 +20,31 @@
   rssUpdate();
 </script>
 
+
+
 <div id="wrapper">
+
+  <div id="video-wrapper"> 
+<video
+    id="my-player"
+    class="video-js"
+    controls
+    preload="auto"
+    poster="//vjs.zencdn.net/v/oceans.png"
+    data-setup='{ "controls": false, "autoplay": true, "loop": true, "fluid": true}'>
+  <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4"></source>
+  <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>
+  <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source>
+  <p class="vjs-no-js">
+    To view this video please enable JavaScript, and consider upgrading to a
+    web browser that
+    <a href="https://videojs.com/html5-video-support/" target="_blank">
+      supports HTML5 video
+    </a>
+  </p>
+</video>
+</div>
+
   <div id="rss-feed"></div>
   <div id="bar"></div>
 </div>
-
-<!--
-<div class="default-ticker">
-  <div>Element 1</div>
-  <div>Element 2</div>
-  <div>Element 3</div>
-  <div>Element 4</div>
-  <div>Element 5</div>
-</div>
--->
