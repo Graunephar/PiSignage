@@ -21,6 +21,7 @@
   white-space: nowrap;
   overflow: hidden;
   z-index: 100000;
+  overflow-x: auto;
 }
 
 body {
@@ -36,18 +37,17 @@ body {
   position: relative;
 }
 
-#news {
-}
-
-
 .bullet {
-  margin-left: .5%;
-  margin-right: .5%;
+  margin-left: 1em;
+  margin-right: 1em;
+  display: inline-block;
+
 }
 
 .feed-text {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 2em;
   color: white;
-  vertical-align: middle;
+  height: 1em !important;
+  display: inline-block;
 }

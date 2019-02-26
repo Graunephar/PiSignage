@@ -1,13 +1,23 @@
 <script>
-  jQuery(function ($) { // Using https://github.com/sdepold/jquery-rss
+//https://www.jqueryscript.net/animation/jQuery-Plugin-Scrolling-Elements-Ticker.html ticker source
+  window.setInterval(rssUpdate, 3600000);
+
+  function rssUpdate() {
+    jQuery(function ($) { // Using https://github.com/sdepold/jquery-rss
     $("#rss-feed").rss("{{{feed}}}",
       {
         layoutTemplate: "<div class='default-ticker'> {entries} </div>",
-        entryTemplate: "<div class='feed-text'> {title} <span class='bullet'>&#8226;</span></div>",
+        entryTemplate: "<div class='feed-text vertical-center'> {title} <span class='bullet'> &#8226; </span></div>",
         host: 'feedrapp.info',
-        limit: 10
+        limit: 10,
+        success: function() {
+          $(".default-ticker").ticker({speed: 200});
+        }
       })
   })
+  }
+
+  rssUpdate();
 </script>
 
 <div id="wrapper">
@@ -24,10 +34,3 @@
   <div>Element 5</div>
 </div>
 -->
-
-<script>
-  setTimeout( //Waiting for the rss to load, doesnt work with document ready
-    function () {
-      $(".default-ticker").ticker();
-    }, 1000);
-</script>
