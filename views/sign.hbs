@@ -6,8 +6,8 @@
     jQuery(function ($) { // Using https://github.com/sdepold/jquery-rss
     $("#rss-feed").rss("{{{feed}}}",
       {
-        layoutTemplate: "<div class='default-ticker'> {entries} </div>",
-        entryTemplate: "<div class='feed-text vertical-center'> {title} <span class='bullet'> &#8226; </span></div>",
+        layoutTemplate: "<div class='default-ticker vertical-center'> {entries} </div>",
+        entryTemplate: "<div class='feed-text'> {title} <span class='bullet'> &#8226; </span></div>",
         host: 'feedrapp.info',
         limit: 10,
         success: function() {

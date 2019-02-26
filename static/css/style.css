@@ -37,7 +37,7 @@ body {
 .vertical-center {
   vertical-align: middle;
   display: inline-block;
-  margin-top: 1em;
+  margin-top: 2em;
   margin-bottom: 1em;
   position: relative;
 }
