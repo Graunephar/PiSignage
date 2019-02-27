@@ -34,20 +34,13 @@ app.get('/', (request, response) => {
 })
 
 app.get('/down', (req, res) => {
-  downloadVideo('file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1280_10MG.mp4', (downloadfilename) => {
-    let videoname = 'video.mp4'
-    let oldname = './' + staticdir + downloadfilename
-    let newname = './' + staticdir + videopath + videoname
-
-    filesystem.rename(oldname, newname)
-
-    videoChanged = true
-    res.send({ path: videopath + videoname })
-  })
+  // let videourl = 'file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1280_10MG.mp4'
+  let videourl = 'http://vjs.zencdn.net/v/oceans.mp4'
+  getVideo(videourl)
 })
 
 app.get('/change', (req, res) => {
-  res.send({change: videoChanged})
+  res.send({ change: videoChanged })
 
   if (videoChanged) {
     videoChanged = false
@@ -61,6 +54,19 @@ app.post('/', (request, response) => {
   })
 })
 
+function getVideo (url) {
+  downloadVideo(url, (downloadfilename) => {
+    let videoname = 'video.mp4'
+    let oldname = './' + staticdir + downloadfilename
+    let newname = './' + staticdir + videopath + videoname
+
+    filesystem.rename(oldname, newname)
+
+    videoChanged = true
+    // res.send({ path: videopath + videoname })
+  })
+}
+
 function downloadVideo (url, callbackfunction) {
   let filename = 'nextvideo.mp4'
   let completepath = './' + staticdir + videopath
@@ -70,7 +76,7 @@ function downloadVideo (url, callbackfunction) {
   let options = {
     directory: completepath,
     filename: filename,
-    timeout: 36000
+    timeout: config.app.timeout
   }
 
   download(url, options, function (err) {
@@ -79,9 +85,10 @@ function downloadVideo (url, callbackfunction) {
   })
 }
 
-function sendEmail (error) {
-  console.log('Email') // TODO: Impelement proberbliu
-  throw error
+function sendEmail (err) {
+  if (err) console.log(err) {
+    console.log
+  }
 }
 
 app.get('/hello', (request, response) => {
