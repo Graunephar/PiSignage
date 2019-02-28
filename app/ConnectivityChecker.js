@@ -1,6 +1,5 @@
 
 const isOnline = require('is-online')
-// const sendmail = require('sendmail')()
 
 class ConnectivityChecker {
   async handleConnectivity (callback) {

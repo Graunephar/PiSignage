@@ -8,6 +8,7 @@ const app = express()
 const downloader = require('download-file')
 const filesystem = require('fs')
 const ConnectivityChecker = require('./ConnectivityChecker')
+const Emailer = require('./Emailer')
 
 const videopath = 'videos/'
 const staticdir = 'static/'
@@ -37,8 +38,8 @@ app.get('/', (request, response) => {
 })
 
 app.get('/test', (req, res) => {
-  let connectivitychecker = new ConnectivityChecker()
-  connectivitychecker.test()
+  let emailer = new Emailer()
+  emailer.sendEmail(config.email.to, config.email.from, 'test', 'HEJ')
 })
 
 app.get('/down', (req, res) => {
@@ -94,6 +95,8 @@ function downloadVideo (url, callbackfunction) {
       connectivitychecker.handleConnectivity(() => {
         downloadVideo(url, callbackfunction)
       })
+      let emailer = new Emailer()
+      emailer.sendEmail(config.email.to, config.email.from, 'test', 'HEJ')
       console.log('Download error')
     } else {
       callbackfunction(videopath + filename)

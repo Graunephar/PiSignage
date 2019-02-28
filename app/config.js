@@ -6,6 +6,10 @@ const config = {
   },
   feed: { // TODO: Should be moved to static updatable json file
     url: 'https://jyllands-posten.dk/?service=rssfeed&submode=topnyheder'
+  },
+  email: {
+    to: 'daniel@graungaard.com',
+    from: 'no-reply@frontsound.dk'
   }
 }
 
