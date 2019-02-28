@@ -52,7 +52,7 @@ app.get('/down', (req, res) => {
 app.get('/change', (req, res) => {
   res.send({ change: videoChanged })
 
-  if (videoChanged) {
+  if (videoChanged === true) {
     videoChanged = false
   }
 })
@@ -70,9 +70,15 @@ function getVideo (url) {
     let oldname = './' + staticdir + downloadfilename
     let newname = './' + staticdir + videopath + videoname
 
-    filesystem.rename(oldname, newname)
+    filesystem.rename(oldname, newname, (err) => {
+      if (err) {
+        getVideo(url) // Retry
+        console.log('Retrying')
+      } else {
+        videoChanged = true
+      }
+    })
 
-    videoChanged = true
     // res.send({ path: videopath + videoname })
   })
 }
@@ -89,18 +95,23 @@ function downloadVideo (url, callbackfunction) {
     timeout: config.app.timeout
   }
 
+  let waserror = false
+
   downloader(url, options, function (err) {
     if (err) {
+      waserror = true
       let connectivitychecker = new ConnectivityChecker()
       connectivitychecker.handleConnectivity(() => {
         downloadVideo(url, callbackfunction)
       })
-      let emailer = new Emailer()
-      emailer.sendEmail(config.email.to, config.email.from, 'test', 'HEJ')
+      // let emailer = new Emailer()
+      // emailer.sendEmail(config.email.to, config.email.from, 'test', 'HEJ')
       console.log('Download error')
     } else {
-      callbackfunction(videopath + filename)
-      console.log('Download success')
+      if (waserror === false) {
+        callbackfunction(videopath + filename)
+        console.log('Download success')
+      }
     }
 
     console.log('why am I here')

@@ -34,24 +34,41 @@ body {
   padding: 0;
 }
 
+#video-wrapper {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+#sign-video {
+  object-fit: cover !important;
+  height: 100%;
+  width: 100%;
+  top: 0 !important;
+  bottom: 0 !important;
+}
+
 .vertical-center {
   vertical-align: middle;
   display: inline-block;
-  margin-top: 2em;
+  margin-top: 1em;
   margin-bottom: 1em;
   position: relative;
+}
+
+.vjs-tech {
+  object-fit: cover !important;
 }
 
 .bullet {
   margin-left: 1em;
   margin-right: 1em;
   display: inline-block;
-
 }
 
 .feed-text {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 2em;
+  height: 3em;
   color: white;
   height: 1em !important;
   display: inline-block;

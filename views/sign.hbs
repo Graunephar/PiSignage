@@ -1,20 +1,31 @@
 <script>
-//https://www.jqueryscript.net/animation/jQuery-Plugin-Scrolling-Elements-Ticker.html ticker source
+  //https://www.jqueryscript.net/animation/jQuery-Plugin-Scrolling-Elements-Ticker.html ticker source
   window.setInterval(rssUpdate, 3600000);
+  window.setInterval(checkForNewVideo, 1000);
 
   function rssUpdate() {
     jQuery(function ($) { // Using https://github.com/sdepold/jquery-rss
-    $("#rss-feed").rss("{{{feed}}}",
-      {
-        layoutTemplate: "<div class='default-ticker vertical-center'> {entries} </div>",
-        entryTemplate: "<div class='feed-text'> {title} <span class='bullet'> &#8226; </span></div>",
-        host: 'feedrapp.info',
-        limit: 10,
-        success: function() {
-          $(".default-ticker").ticker({speed: 200});
-        }
-      })
-  })
+      $("#rss-feed").rss("{{{feed}}}",
+        {
+          layoutTemplate: "<div class='default-ticker vertical-center'> {entries} </div>",
+          entryTemplate: "<div class='feed-text'> {title} <span class='bullet'> &#8226; </span></div>",
+          host: 'feedrapp.info',
+          limit: 10,
+          success: function () {
+            $(".default-ticker").ticker({ speed: 200 });
+          }
+        })
+    })
+  }
+
+  function checkForNewVideo() {
+    $.getJSON("/change", function ( data ) {
+      let result = data['change'];
+      if(result === true) {
+        console.log("TRUUUE")
+      }
+
+    })
   }
 
   rssUpdate();
@@ -24,25 +35,21 @@
 
 <div id="wrapper">
 
-  <div id="video-wrapper"> 
- <!-- TODO: LOGO UPDATE -->
-<video
-    id="my-player"
-    class="video-js"
-    controls
-    preload="auto"
-    poster="//vjs.zencdn.net/v/oceans.png"
-    data-setup='{ "controls": false, "autoplay": true, "loop": true, "fluid": true}'>
-  <source src="videos/video.mp4" type="video/mp4"></source>
-  <p class="vjs-no-js">
-    To view this video please enable JavaScript, and consider upgrading to a
-    web browser that
-    <a href="https://videojs.com/html5-video-support/" target="_blank">
-      supports HTML5 video
-    </a>
-  </p>
-</video>
-</div>
+  <div id="video-wrapper">
+    <!-- TODO: LOGO UPDATE -->
+    <video id="sign-video" class="video-js" controls width="100%" height="100%" preload="auto" poster="/images/logo.png"
+      data-setup='{ "controls": false, "autoplay": true, "loop": true, "fluid": true}'>
+      <source src="videos/video.mp4" type="video/mp4">
+      </source>
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank">
+          supports HTML5 video
+        </a>
+      </p>
+    </video>
+  </div>
 
   <div id="rss-feed"></div>
   <div id="bar"></div>
