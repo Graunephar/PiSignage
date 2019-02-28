@@ -5,10 +5,13 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const config = require('./config') // The config file
 const app = express()
-const download = require('download-file')
+const downloader = require('download-file')
 const filesystem = require('fs')
+const ConnectivityChecker = require('./ConnectivityChecker')
+
 const videopath = 'videos/'
 const staticdir = 'static/'
+
 let videoChanged = false
 
 const port = config.app.port
@@ -27,15 +30,21 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(staticdir))
 
 app.get('/', (request, response) => {
-  console.log(feed)
+  console.log('Starting page with: ' + feed)
   response.render('sign', {
     feed: feed // TODO: Could support a list
   })
 })
 
+app.get('/test', (req, res) => {
+  let connectivitychecker = new ConnectivityChecker()
+  connectivitychecker.test()
+})
+
 app.get('/down', (req, res) => {
   // let videourl = 'file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1280_10MG.mp4'
-  let videourl = 'http://vjs.zencdn.net/v/oceans.mp4'
+  // let videourl = 'http://vjs.zencdn.net/v/oceans.mp4'
+  let videourl = 'http://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1920_18MG.mp4'
   getVideo(videourl)
 })
 
@@ -71,7 +80,7 @@ function downloadVideo (url, callbackfunction) {
   let filename = 'nextvideo.mp4'
   let completepath = './' + staticdir + videopath
 
-  console.log(completepath)
+  console.log('video download startet')
 
   let options = {
     directory: completepath,
@@ -79,16 +88,20 @@ function downloadVideo (url, callbackfunction) {
     timeout: config.app.timeout
   }
 
-  download(url, options, function (err) {
-    if (err) sendEmail(err)
-    callbackfunction(videopath + filename)
-  })
-}
+  downloader(url, options, function (err) {
+    if (err) {
+      let connectivitychecker = new ConnectivityChecker()
+      connectivitychecker.handleConnectivity(() => {
+        downloadVideo(url, callbackfunction)
+      })
+      console.log('Download error')
+    } else {
+      callbackfunction(videopath + filename)
+      console.log('Download success')
+    }
 
-function sendEmail (err) {
-  if (err) console.log(err) {
-    console.log
-  }
+    console.log('why am I here')
+  })
 }
 
 app.get('/hello', (request, response) => {

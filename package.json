@@ -14,7 +14,9 @@
     "body-parser": "^1.18.2",
     "download-file": "^0.1.5",
     "express": "^4.16.2",
-    "express-handlebars": "^3.0.0"
+    "express-handlebars": "^3.0.0",
+    "is-online": "^8.0.0",
+    "sendmail": "^1.4.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
