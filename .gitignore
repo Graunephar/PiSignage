@@ -1,6 +1,7 @@
 
 node_modules/*
 node_modules
+static/videos
 
 
 # Created by https://www.gitignore.io/api/macos,linux,windows,pycharm,webstorm,jetbrains,webstorm+all,jetbrains+iml,visualstudiocode
