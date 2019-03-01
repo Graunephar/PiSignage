@@ -43,9 +43,9 @@ app.get('/test', (req, res) => {
 })
 
 app.get('/down', (req, res) => {
-  // let videourl = 'file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1280_10MG.mp4'
+  let videourl = 'file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1280_10MG.mp4'
   // let videourl = 'http://vjs.zencdn.net/v/oceans.mp4'
-  let videourl = 'http://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1920_18MG.mp4'
+  // let videourl = 'http://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_1920_18MG.mp4'
   getVideo(videourl)
 })
 

@@ -19,10 +19,14 @@
   }
 
   function checkForNewVideo() {
-    $.getJSON("/change", function ( data ) {
+    $.getJSON("/change", function (data) {
       let result = data['change'];
-      if(result === true) {
-        console.log("TRUUUE")
+      if (result === true) { //Acoording to server there is a new video file ready
+        var video = document.getElementById('sign-video');
+        console.log("Reloadings video");
+        videojs("sign-video", {}, function(){
+          this.load(); //Reload video
+        });
       }
 
     })
