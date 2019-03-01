@@ -8,11 +8,12 @@ const app = express()
 const downloader = require('download-file')
 const filesystem = require('fs')
 const ConnectivityChecker = require('./ConnectivityChecker')
-const Emailer = require('./Emailer')
+// const Emailer = require('./Emailer')
+const axios = require('axios')
 
 const videopath = 'videos/'
 const staticdir = 'static/'
-
+let lasturl
 let videoChanged = false
 
 const port = config.app.port
@@ -38,8 +39,7 @@ app.get('/', (request, response) => {
 })
 
 app.get('/test', (req, res) => {
-  let emailer = new Emailer()
-  emailer.sendEmail(config.email.to, config.email.from, 'test', 'HEJ')
+  res.json({video: {url: 'http://vjs.zencdn.net/v/oceans.mp4'}})
 })
 
 app.get('/down', (req, res) => {
@@ -124,6 +124,23 @@ app.get('/hello', (request, response) => {
     message: request.query.message
   })
 })
+
+setInterval(() => {
+  let url = config.content.url
+
+  axios.get(url)
+  .then(response => {
+    let newurl = response.data.video.url
+    if (newurl !== lasturl) {
+      console.log('New url found')
+      lasturl = newurl
+      getVideo(newurl)
+    }
+  })
+  .catch(error => {
+    console.log(error.message)
+  })
+}, config.app.updaterate)
 
 app.listen(port, (err) => {
   if (err) return console.error(`An error occurred: ${err}`)
